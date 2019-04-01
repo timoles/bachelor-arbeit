@@ -1,5 +1,9 @@
 # BA Timo
 
+# Goals
+
+Meterpreter output in base64 encoded encrypted "viewstate"
+
 ## Debugging
 
 Copy new dlls into metasploit directory
@@ -32,6 +36,7 @@ https://github.com/rapid7/mettle
 [Create extensions](https://github.com/rapid7/metasploit-payloads/tree/master/c/meterpreter#creating-extensions)
 
 [Explanation what are TLVs](https://buffered.io/posts/tlv-traffic-obfuscation/)
+
 # Goals
 
 1. Make extension which gives back what it gets in methods
@@ -44,14 +49,14 @@ https://github.com/rapid7/mettle
 
 1. Follow this tutorial for the dll creation [Create extensions](https://github.com/rapid7/metasploit-payloads/tree/master/c/meterpreter#creating-extensions) but carefull, I had to copy a working extension because an error during linking (file not found) was thrown
 
-2. Following files are most likely needed
+# TODO UPDATE THIS LIST
+
+2. Following files are most likely needed 
 ```bash
 ./data/meterpreter/ext_server_malleable.x64.dll # This one is our compiled dll which will be injected into meterpreter
-./lib/rex/post/meterpreter/ui/console/command_dispatcher/malleable.rb # In here something happens with the CommandDispacther
-./lib/rex/post/meterpreter/ui/console/command_dispatcher/malleable/malleableMain.rb # In here we define commands (in meterpreter session "help") and helptext we also call functions here (which are defined in the "extensions" directory). Also I think some UI cleanup/manage stuff
+./lib/rex/post/meterpreter/ui/console/command_dispatcher/malleable.rb # In here we define commands (in meterpreter session "help") and helptext we also call functions here (which are defined in the "extensions" directory). Also I think some UI cleanup/manage stuff
 
-./lib/rex/post/meterpreter/extensions/malleable/malleableMain/malleableMain.rb # In here we implement the logic for the functions we can call through the UI. Also I think we send the actual requests to the server
-./lib/rex/post/meterpreter/extensions/malleable/malleable.rb # I think we initialize the extension here and register some aliases.
+./lib/rex/post/meterpreter/extensions/malleable/malleable.rb # # In here we implement the logic for the functions we can call through the UI. Also we send the actual requests to the server
 
 ./lib/rex/post/meterpreter/extensions/malleable/tlv.rb # I think this has to do with obfuscating traffic. Data saved in TLV variables are obfuscated to some extend. TLV can be appended to Requests and sent out
 ```
@@ -77,13 +82,42 @@ rm ~/Tools/bachelor_metasploit/metasploit-framework/data/meterpreter/*.dll; cp /
 
 Meterpreter is always called the server and metasploit always called the client
 
-Set log level in metasploit `setg LogLevel 3`1
+Set log level in Metasploit `setg LogLevel 3`
 
 Open all important client side files
 ```bash
-subl ./lib/rex/post/meterpreter/ui/console/command_dispatcher/malleable.rb
-subl ./lib/rex/post/meterpreter/ui/console/command_dispatcher/malleable/malleableMain.rb
-subl ./lib/rex/post/meterpreter/extensions/malleable/malleableMain/malleableMain.rb
-subl ./lib/rex/post/meterpreter/extensions/malleable/malleable.rb
 subl ./lib/rex/post/meterpreter/extensions/malleable/tlv.rb
+subl ./lib/rex/post/meterpreter/extensions/malleable/malleable.rb
+subl ./lib/rex/post/meterpreter/ui/console/command_dispatcher/malleable.rb
 ``` 
+
+# Options to handle the obfuscation problem
+
+* DLL inject and overwrite sending functions (what about tlvs? Can we do this?)
+
+* Create clone of http meterpreter (most likely least initial effort, but need to manually update in the future)
+
+* Change original meterpreter code and make a check if extension is loaded
+
+* Create own transport (Probably wrong place to change these things)
+
+* is there a functionality which is checked called beforehand?
+
+* ask OJreeves for an idea
+
+# Problems
+
+* Extint not working (preload extension before any communication)
+
+* XOR key applied to packets, looks suspicious
+
+* We cant use tlv functionality, to send the obfuscated packet we need to hook right before the packet send function
+
+* elua for better performance, because LUA needs a while to close. (In BA write about multiple possibilities and why I've chosen LUA)
+
+* Lua script error handling with automatic fallback 
+
+# Bisherige Schritte
+
+1. Basic functionality Extension zum laufen gebracht
+2. Lua zum laufen gebracht
