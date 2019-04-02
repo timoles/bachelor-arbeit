@@ -37,6 +37,13 @@ https://github.com/rapid7/mettle
 
 [Explanation what are TLVs](https://buffered.io/posts/tlv-traffic-obfuscation/)
 
+[LUA performance tipps](https://www.lua.org/gems/sample.pdf)
+[LUA Base64](http://lua-users.org/wiki/BaseSixtyFour)
+[LUA Binary](https://sourceforge.net/projects/luabinaries/files/5.3.4/Windows%20Libraries/Dynamic/)
+[winhttp1](https://docs.microsoft.com/de-de/windows/desktop/WinHttp/winhttp-sessions-overview#Posting_data_to_the_)
+[winhttp2](https://docs.microsoft.com/de-de/windows/desktop/WinHttp/winhttp-sessions-overview#Downloading_resource)
+
+
 # Goals
 
 1. Make extension which gives back what it gets in methods
