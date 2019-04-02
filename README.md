@@ -37,6 +37,8 @@ https://github.com/rapid7/mettle
 
 [Explanation what are TLVs](https://buffered.io/posts/tlv-traffic-obfuscation/)
 
+[Meterpreter reverse proxies](https://ionize.com.au/reverse-https-meterpreter-and-empire-behind-nginx/)
+
 # Goals
 
 1. Make extension which gives back what it gets in methods
@@ -74,9 +76,12 @@ rm ~/Tools/bachelor_metasploit/metasploit-framework/data/meterpreter/*.dll; cp /
 
 # Ausblick
 
-* Integrate event handling system in meterpreter where  we can hook specific functions (like in apache2). (e.g function systemcall or function sendOutgoingpackage)
+* Integrate event handling system in meterpreter where  we can hook specific functions (like in apache2). (e.g function systemcall or function sendOutgoingpackage) Queues with event priorities and so on
 
 * What happens if extension is unloaded in the middle of beeing used, normaly then meterpreter connection would cut out. Would need backup transport for that
+
+* "Real" usable web application with reverse proxy for extra stealth
+
 
 # Notes
 
@@ -105,6 +110,16 @@ subl ./lib/rex/post/meterpreter/ui/console/command_dispatcher/malleable.rb
 
 * ask OJreeves for an idea
 
+# reverse proxy
+
+Decisions: evilginx(1\|2) or openresty (vor nachteile usw....)
+
+Decided for openresty
+```
+sudo docker run -v ./nginx.vh.default.conf:/etc/nginx/conf.d/default.conf openresty/openresty:bionic
+sudo docker run -v ./nginx.vh.default.conf:/etc/nginx/conf.d/default.conf -p 80:80 openresty/openresty:bionic
+```
+
 # Problems
 
 * Extint not working (preload extension before any communication)
@@ -117,7 +132,20 @@ subl ./lib/rex/post/meterpreter/ui/console/command_dispatcher/malleable.rb
 
 * Lua script error handling with automatic fallback 
 
+* Get loaded commands/DLL/extensions
+
+* Check advanced options in payload (e.g. allowdirectreverseProxy)
+
+* SSL
+
+* Stageless problems? especially with reverse proxy
+
+* malicously crafted packets which will get parsed by lua
+
+* which lua version has openresty and which one has meterpreter?
+
 # Bisherige Schritte
 
 1. Basic functionality Extension zum laufen gebracht
 2. Lua zum laufen gebracht
+3. Reverse proxy aufgesetzt (openresty)
