@@ -71,7 +71,7 @@ https://github.com/rapid7/mettle
 
 2. Delete old meterpreter dll, copy new into metasploit directory, start msfconsole with resource file
 ```
-rm ~/Tools/bachelor_metasploit/metasploit-framework/data/meterpreter/*.dll; cp /mnt/hgfs/Shared_Folder/bachelor/vs_output/x64/* ~/Tools/bachelor_metasploit/metasploit-framework/data/meterpreter/; ./msfconsole -r ~/Projects/bachelor/msf.rc
+rm /home/timo/Tools/bachelor/metasploit-framework/data/meterpreter/*.dll; cp /mnt/hgfs/Shared_Folder/bachelor/vs_output/x64/* /home/timo/Tools/bachelor/metasploit-framework/data/meterpreter/; ./msfconsole -r ~/Projects/bachelor/msf.rc
 ```
 
 3. Check if generate function with extinit works
@@ -162,6 +162,10 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 * validate lua script
 
 * lua script through string limited to xx thousand characters (under 20k ober 10k) (also formatting is shit)
+
+* change in lua script "encrypt" to "encode"
+
+* how to make c implementation of malleable as flexible as possible
 
 # Bisherige Schritte
 

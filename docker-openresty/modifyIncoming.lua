@@ -44,5 +44,5 @@ end
 
 if ngx.req.get_method() ~= "GET"
 then
-  --decrypt()
+  decrypt()
 end
