@@ -32,10 +32,12 @@ function dec(data)
 end
 
 function encode()
-        local encapsuled_body = '<html><head></head><body>viewstate="' .. enc(ngx.arg[1]) .. '"</body></html>'
-        ngx.arg[1] =  encapsuled_body
-        ngx.arg[2] = true -- Set end of stream to true (or something like that)
+    -- encapsule body in viewstate
+    local encapsuled_body = '<html><head></head><body>viewstate="' .. enc(ngx.arg[1]) .. '"</body></html>'
+    encapsuled_body =  ngx.var.my_var .. encapsuled_body
+    ngx.arg[1] =  encapsuled_body -- set encapsuled response as new body
+    ngx.arg[2] = true -- Set end of stream to true (or something like that)
 end
 
-encode()
+encode() -- encode ALL outgoing messages
 

@@ -31,18 +31,18 @@ function dec(data)
     end))
 end
 
-function encrypt()
-end
-
 function decrypt()
-	ngx.req.read_body()
-	local oldbody = ngx.req.get_body_data()
-	local new_variables = string.match(oldbody, "viewstate=\"(.-)\"")
-	new_variables = dec(new_variables) 
-	ngx.req.set_body_data(new_variables)
+    ngx.var.my_var = 12
+
+	ngx.req.read_body() -- read body, body now empty!
+	local oldbody = ngx.req.get_body_data() -- get entire body data
+	local new_variables = string.match(oldbody, "viewstate=\"(.-)\"") -- get payload from viewstate
+	new_variables = dec(new_variables) -- decode base64
+    response_body = string.sub(new_variables, 1, -2) -- remove the last character (unwanted newline)
+	ngx.req.set_body_data(response_body) -- set new response
 end
 
-if ngx.req.get_method() ~= "GET"
+if ngx.req.get_method() ~= "GET" -- if we have anything but GET we want to base64 decode the payload
 then
   decrypt()
 end

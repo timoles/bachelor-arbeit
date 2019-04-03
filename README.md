@@ -167,6 +167,8 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * how to make c implementation of malleable as flexible as possible
 
+* if we want to make real website we have to check how to differenciate inbetween meterpreter and normal user (filter it when encoding decondign in reverse proxy!) (mby header)
+
 # Bisherige Schritte
 
 1. Basic functionality Extension zum laufen gebracht
