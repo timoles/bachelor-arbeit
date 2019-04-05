@@ -31,18 +31,13 @@ function dec(data)
     end))
 end
 
-function encrypt()
+function encode()
+    -- encapsule body in viewstate
+    local encapsuled_body = '<html><head></head><body>viewstate="' .. enc(ngx.arg[1]) .. '"</body></html>'
+    encapsuled_body =  ngx.var.my_var .. encapsuled_body
+    ngx.arg[1] =  encapsuled_body -- set encapsuled response as new body
+    ngx.arg[2] = true -- Set end of stream to true (or something like that)
 end
 
-function decrypt()
-	ngx.req.read_body()
-	local oldbody = ngx.req.get_body_data()
-	local new_variables = string.match(oldbody, "viewstate=\"(.-)\"")
-	new_variables = dec(new_variables) 
-	ngx.req.set_body_data(new_variables)
-end
+encode() -- encode ALL outgoing messages
 
-if ngx.req.get_method() ~= "GET"
-then
-  --decrypt()
-end

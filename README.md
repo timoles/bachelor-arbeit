@@ -71,7 +71,7 @@ https://github.com/rapid7/mettle
 
 2. Delete old meterpreter dll, copy new into metasploit directory, start msfconsole with resource file
 ```
-rm ~/Tools/bachelor_metasploit/metasploit-framework/data/meterpreter/*.dll; cp /mnt/hgfs/Shared_Folder/bachelor/vs_output/x64/* ~/Tools/bachelor_metasploit/metasploit-framework/data/meterpreter/; ./msfconsole -r ~/Projects/bachelor/msf.rc
+rm /home/timo/Tools/bachelor/metasploit-framework/data/meterpreter/*.dll; cp /mnt/hgfs/Shared_Folder/bachelor/vs_output/x64/* /home/timo/Tools/bachelor/metasploit-framework/data/meterpreter/; ./msfconsole -r ~/Projects/bachelor/msf.rc
 ```
 
 3. Check if generate function with extinit works
@@ -122,8 +122,7 @@ Decisions: evilginx(1\|2) or openresty (vor nachteile usw....)
 
 Decided for openresty
 ```
-sudo docker run -v ./nginx.vh.default.conf:/etc/nginx/conf.d/default.conf openresty/openresty:bionic
-sudo docker run -v ./nginx.vh.default.conf:/etc/nginx/conf.d/default.conf -p 80:80 openresty/openresty:bionic
+sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 -it myopenresty
 ```
 
 # Problems
@@ -150,8 +149,30 @@ sudo docker run -v ./nginx.vh.default.conf:/etc/nginx/conf.d/default.conf -p 80:
 
 * which lua version has openresty and which one has meterpreter?
 
+* Check how reverse proxy works back
+
+* Slim LUA framework
+
+* Free pointer in server_transport_winhttp.c
+
+* Don't save lua file on system
+
+* Is this filter needed?
+
+* validate lua script
+
+* lua script through string limited to xx thousand characters (under 20k ober 10k) (also formatting is shit)
+
+* change in lua script "encrypt" to "encode"
+
+* how to make c implementation of malleable as flexible as possible
+
+* if we want to make real website we have to check how to differenciate inbetween meterpreter and normal user (filter it when encoding decondign in reverse proxy!) (mby header)
+
 # Bisherige Schritte
 
 1. Basic functionality Extension zum laufen gebracht
 2. Lua zum laufen gebracht
 3. Reverse proxy aufgesetzt (openresty)
+4. Integrated LUA dll into meterpreter
+5. Make LUA take script string
