@@ -31,16 +31,13 @@ end
 
 
 function encrypt(s)
-	s = "<html> viewstate=\"" .. s ..  "\" </html>"
+	s = '<html> viewstate=\"' .. s ..  '\" </html>'
 	encoded = enc(s)
 	return(tostring(encoded))
 end
 
 function decrypt(s)		
 	s = dec(s)
-	 print(string.match(s, "viewstate=\"(.-)\""))
-	--for w in string.gmatch(s,"viewstate=\"%w+\"") do
-	  --print(w .. "\n")
-	--end
+	s = string.match(s, 'viewstate=\"(.-)\"')
 	return(s)
 end
