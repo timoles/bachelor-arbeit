@@ -26,6 +26,8 @@ function dec(data)
             return string.char(c)
     end))
 end
+
+
 function encode(s)
 	encoded = enc(s)
     resultString = "<html> viewstate=\"" .. encoded ..  "\" </html>"
@@ -34,6 +36,6 @@ end
 
 function decode(s)		
 	s = dec(s)
-	print(string.match(s, "viewstate=\"(.-)\""))
+	s = string.match(s, 'viewstate=\"(.-)\"')
 	return(s)
 end
