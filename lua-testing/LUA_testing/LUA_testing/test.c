@@ -15,7 +15,7 @@
 #pragma comment(lib, "liblua53.a")
 
 int
-maisn(void)
+main(void)
 {
 
 	int status, result, i;
