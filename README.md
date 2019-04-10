@@ -45,6 +45,10 @@ https://github.com/rapid7/mettle
 
 [Meterpreter reverse proxies](https://ionize.com.au/reverse-https-meterpreter-and-empire-behind-nginx/)
 
+[Openresty nginx directive diagram](https://github.com/openresty/lua-nginx-module#directives)
+
+[LUA Base64 encoder/decoder](https://github.com/ErnieE5/ee5_base64)
+
 # Goals
 
 1. Make extension which gives back what it gets in methods
@@ -172,6 +176,22 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 * Fix import slashes (/ and \\ )
 
 * Add and use transport when malleable is loaded
+
+* Deconstructor which deloads malleable 
+
+* meterpreter stürzt ab?
+
+* how to implement lua libraries (from setscript or so)
+
+* which lua version on openresty?
+
+* upstream prematurely closed connection while reading response header from upstream,
+
+* Lock until setstring is completed
+
+* check if body nil in lua
+
+
 
 # Bisherige Schritte
 

@@ -143,7 +143,8 @@ COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 # Timo
 COPY modifyIncoming.lua /usr/local/openresty/nginx/conf/modifyIncoming.lua
 COPY modifyOutgoing.lua /usr/local/openresty/nginx/conf/modifyOutgoing.lua
-
+COPY bodyFilterIncomming.lua /usr/local/openresty/nginx/conf/bodyFilterIncomming.lua
+COPY ee5_base64.lua /usr/local/openresty/nginx/conf/ee5_base64.lua
 CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;"]
 
 # Use SIGQUIT instead of default SIGTERM to cleanly drain requests

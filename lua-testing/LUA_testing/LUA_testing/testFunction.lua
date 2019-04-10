@@ -1,41 +1,158 @@
-local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-function enc(data)
-    return ((data:gsub('.', function(x) 
-        local r,b='',x:byte()
-        for i=8,1,-1 do r=r..(b%2^i-b%2^(i-1)>0 and '1' or '0') end
-        return r;
-    end)..'0000'):gsub('%d%d%d?%d?%d?%d?', function(x)
-        if (#x < 6) then return '' end
-        local c=0
-        for i=1,6 do c=c+(x:sub(i,i)=='1' and 2^(6-i) or 0) end
-        return b:sub(c+1,c+1)
-    end)..({ '', '==', '=' })[#data%3+1])
+-- The MIT License (MIT)
+-- Copyright (c) 2016 Patrick Joseph Donnelly (batrick@batbytes.com)
+--
+-- Permission is hereby granted, free of charge, to any person obtaining a copy of
+-- this software and associated documentation files (the "Software"), to deal in
+-- the Software without restriction, including without limitation the rights to
+-- use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+-- of the Software, and to permit persons to whom the Software is furnished to do
+-- so, subject to the following conditions:
+--
+-- The above copyright notice and this permission notice shall be included in all
+-- copies or substantial portions of the Software.
+--
+-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+-- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+-- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+-- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+-- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+-- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+-- SOFTWARE.
+
+---
+-- Base64 encoding and decoding. Follows RFC 4648.
+--
+-- @author Patrick Donnelly <batrick@batbytes.com>
+-- @copyright The MIT License (MIT); Copyright (c) 2016 Patrick Joseph Donnelly (batrick@batbytes.com)
+
+local assert = assert
+local error = error
+local ipairs = ipairs
+local setmetatable = setmetatable
+
+local open = require "io".open
+local popen = require "io".popen
+
+local random = require "math".random
+
+local tmpname = require "os".tmpname
+local remove = require "os".remove
+
+
+local char = require "string".char
+
+local concat = require "table".concat
+local b64table = {
+  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+  'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+  'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+  'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+  'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+  'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+  'w', 'x', 'y', 'z', '0', '1', '2', '3',
+  '4', '5', '6', '7', '8', '9', '+', '/'
+}
+
+---
+-- Encodes a string to Base64.
+-- @param p Data to be encoded.
+-- @return Base64-encoded string.
+function enc (p)
+    local out = {}
+    local i = 1
+    local m = #p % 3
+
+    while i+2 <= #p do
+        local a, b, c = p:byte(i, i+2)
+        local e1 = b64table[((a>>2)&0x3f)+1];
+        local e2 = b64table[((((a<<4)&0x30)|((b>>4)&0xf))&0x3f)+1];
+        local e3 = b64table[((((b<<2)&0x3c)|((c>>6)&0x3))&0x3f)+1];
+        local e4 = b64table[(c&0x3f)+1];
+        out[#out+1] = e1..e2..e3..e4
+        i = i + 3
+    end
+
+    if m == 2 then
+        local a, b = p:byte(i, i+1)
+        local c = 0
+        local e1 = b64table[((a>>2)&0x3f)+1];
+        local e2 = b64table[((((a<<4)&0x30)|((b>>4)&0xf))&0x3f)+1];
+        local e3 = b64table[((((b<<2)&0x3c)|((c>>6)&0x3))&0x3f)+1];
+        out[#out+1] = e1..e2..e3.."="
+    elseif m == 1 then
+        local a = p:byte(i)
+        local b = 0
+        local e1 = b64table[((a>>2)&0x3f)+1];
+        local e2 = b64table[((((a<<4)&0x30)|((b>>4)&0xf))&0x3f)+1];
+        out[#out+1] = e1..e2.."=="
+    end
+
+    return concat(out)
 end
 
-function dec(data)
-    data = string.gsub(data, '[^'..b..'=]', '')
-    return (data:gsub('.', function(x)
-        if (x == '=') then return '' end
-        local r,f='',(b:find(x)-1)
-        for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end
-        return r;
-    end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x)
-        if (#x ~= 8) then return '' end
-        local c=0
-        for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end
-            return string.char(c)
-    end))
+local db64table = setmetatable({}, {__index = function (t, k) error "invalid encoding: invalid character" end})
+do
+    local r = {["="] = 0}
+    for i, v in ipairs(b64table) do
+        r[v] = i-1
+    end
+    for i = 0, 255 do
+        db64table[i] = r[char(i)]
+    end
+end
+
+---
+-- Decodes Base64-encoded data.
+-- @param e Base64 encoded data.
+-- @return Decoded data.
+function dec (e)
+    local out = {}
+    local i = 1
+    local done = false
+
+    e = e:gsub("%s+", "")
+
+    local m = #e % 4
+    if m ~= 0 then
+        error "invalid encoding: input is not divisible by 4"
+    end
+
+    while i+3 <= #e do
+        if done then
+            error "invalid encoding: trailing characters"
+        end
+
+        local a, b, c, d = e:byte(i, i+3)
+
+        local x = ((db64table[a]<<2)&0xfc) | ((db64table[b]>>4)&0x03)
+        local y = ((db64table[b]<<4)&0xf0) | ((db64table[c]>>2)&0x0f)
+        local z = ((db64table[c]<<6)&0xc0) | ((db64table[d])&0x3f)
+
+        if c == 0x3d then
+            assert(d == 0x3d, "invalid encoding: invalid character")
+            out[#out+1] = char(x)
+            done = true
+        elseif d == 0x3d then
+            out[#out+1] = char(x, y)
+            done = true
+        else
+            out[#out+1] = char(x, y, z)
+        end
+        i = i + 4
+    end
+
+    return concat(out)
 end
 
 
 function encode(s)
-	encoded = enc(s)
-    resultString = "<html> viewstate=\"" .. encoded ..  "\" </html>"
+	--encoded = enc(s)
+    encoded = enc(s)
+    resultString = "test=123&viewstate=\"" .. encoded ..  "\"&test2=456"
 	return(tostring(resultString))
 end
 
 function decode(s)		
-	s = dec(s)
 	s = string.match(s, 'viewstate=\"(.-)\"')
-	return(s)
+    return(dec(s))
 end
