@@ -8,11 +8,11 @@ base64=require('/usr/local/openresty/nginx/conf/ee5_base64')
 function decode()
 	ngx.req.read_body() -- read body, body now empty!
 	local old_body = ngx.req.get_body_data() -- get entire body data
-    ngx.log(1, old_body)
-    ngx.log(1, "IN DECRYPT.")
+    --ngx.log(1, old_body)
+    --ngx.log(1, "IN DECRYPT.")
 
 	local new_variables = string.match(old_body, "viewstate=\"(.-)\"") -- get payload from viewstate
-    ngx.log(1, new_variables)
+    --ngx.log(1, new_variables)
     if (new_variables ~= nil) then
     	new_variables = base64.decode(new_variables) -- decode base64
         response_body = new_variables

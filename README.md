@@ -191,7 +191,17 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * check if body nil in lua
 
+* difference vdprintf and dprintf
 
+* for malloc and stuff check if enough memory available
+
+* Check why bare extension is not working
+
+* Only encode response when the  incomming packet was also encoded
+
+* Recieving packages on meterpreter is complicated, we first read decode validate the header of the package, then we read the payload in chunks. With the current implementation we would need to read the entire body at once to have a sensible, easy, "high level" possibility for dynamic LUA scripts. We would probably need to override method handles in the the transport, depending if malleable extension is loaded. (The method handles are ind  the last 20 lines of `server_transport_winhttp.c`) So now we try to implement a new transport instead of a malleable extension.
+
+* When implementing a transport we have to check if we keep the LUA approach  on the client side, or if we want to decode the pacakages in ruby. (Client: Ruby, Server: C with LUA interpreter) || (Client: Ruby with LUA interpreter, Server: C with LUA interpreter)
 
 # Bisherige Schritte
 
