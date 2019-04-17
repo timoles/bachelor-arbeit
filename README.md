@@ -221,6 +221,32 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * need to readd lua interpreter in own transport, then need to rewrite recieve and send functions to encode and decode (and need to add lua in ruby)
 
+* Minimize LUA
+
+* port to 32 bit
+
+* test on multiple different windows versions
+
+* does malleable work with wininet transport?
+
+* check all mallocs, realloc, ... if out of memory is properly handled!!!
+
+* remove unused includes and defines
+
+* Es gibt einen ort wo cases gecheckt werden (malleable hat 0x28), wie wo wird das verwendet?
+
+* Implement the error handling we didn't copy (from server_transport_winhttp_malleable read_response rewrite)
+
+* Check behaviour if wrong packages are incoming
+
+* checkup on the holy if statement (within the malleable transport, the if statement which does crash the create_transport() if it's not there)
+
+* Impelment set lua script in transport
+
+* Code cleanup on reading 
+
+
+
 # Bisherige Schritte
 
 1. Basic functionality Extension zum laufen gebracht
