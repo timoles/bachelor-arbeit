@@ -1,3 +1,5 @@
+-- TODO restore all the comments from the official nmap source
+
 local assert = assert
 local error = error
 local ipairs = ipairs
@@ -22,7 +24,7 @@ local b64table = {
 function enc (p)
     local out = {}
     local i = 1
-    local m = #p % 3
+    local m = #p % 3<
     while i+2 <= #p do
         local a, b, c = p:byte(i, i+2)
         local e1 = b64table[((a>>2)&0x3f)+1];

