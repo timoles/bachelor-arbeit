@@ -255,6 +255,12 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * Grafik welche darstellt wie die config erstellt wird (mit padding und so) siehe config.h
 
+* what happens if response/request body is extremely big? (e.g big ls or upload of file)(maybe a lua nginx problem there)
+
+* Carefull in regex, buffer can have random characters which are catched by regex
+
+* test if all extensions are loadable
+
 # Bisherige Schritte
 
 1. Basic functionality Extension zum laufen gebracht
@@ -271,8 +277,8 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
  Payload generation failed: comparison of Integer with nil failed
 
- git remote add upstream git://github.com/rapid7/REPO-YOU-FORKED-FROM.git
+ git remote add upstream git://github.com/rapid7/metasploit-framework.git
 git fetch upstream
-
+git pull upstream master
 
 # * Anstatt derzeitiger loesung mit flag die umschaellt wie bei wininet, neue loesung mit url mhttp!!!
