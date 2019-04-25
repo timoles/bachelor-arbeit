@@ -119,13 +119,13 @@ function dec (e)
     return concat(out)
 end
 
-
 function encode(s)
-    return s
-    --encoded = enc(s)
-    --resultString = "test=123&viewstate=\"" .. encoded ..  "\"&test2=456"
-	--return(tostring(resultString))
+    --return s
+    encoded = enc(s)
+    resultString = "test=123&viewstate=\"" .. encoded ..  "\"&test2=456"
+	return(resultString)
 end
+
 function decode(s)
     if string.match(s, 'viewstate') then		
         s = string.match(s, 'viewstate=\"(.-)\"</body></html>')

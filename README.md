@@ -261,6 +261,10 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * test if all extensions are loadable
 
+* mby two new lines at end of base64 encoded stuff?
+
+* Change User Agent to something else
+
 # Bisherige Schritte
 
 1. Basic functionality Extension zum laufen gebracht
@@ -280,5 +284,7 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
  git remote add upstream git://github.com/rapid7/metasploit-framework.git
 git fetch upstream
 git pull upstream master
+
+to copy the custom .dlls to the linux system and build the meterpreter in metasploit-framework we need to run `buildAndCopyMeterpreter.sh`
 
 # * Anstatt derzeitiger loesung mit flag die umschaellt wie bei wininet, neue loesung mit url mhttp!!!

