@@ -17,7 +17,7 @@ function decode()
     	new_variables = base64.decode(new_variables) -- decode base64
         response_body = new_variables
         --response_body = string.sub(new_variables, 1, -2) -- remove the last character (unwanted newline)
-        ngx.log(1, response_body)
+        --ngx.log(1, response_body)
     	ngx.req.set_body_data(response_body) -- set new response
     else
         ngx.req.set_body_data(old_body)
