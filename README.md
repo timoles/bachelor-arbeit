@@ -204,7 +204,7 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * test with initial malleable transport and with added malleable transport
 
-* if transport cant be initialized (and we have no valid transports we nuke the CPU) `transport initialisation failed, moving to the next transport`
+* if transport cant be initialized (and we have no valid transports we nuke the CPU) `transport initialization failed, moving to the next transport`
 
 * own transport works now, need to check if CHANGING into the transport works aswell. (as initial transport version it works (in metasploit framework `setg OverrideScheme mhttp`))
 
@@ -262,6 +262,10 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * Fallback if malleableTransport fails
 
+* Update and clean dockerfile
+
+* config size problem
+
 # Bisherige Schritte
 
 1. Basic functionality Extension zum laufen gebracht
@@ -283,5 +287,9 @@ git fetch upstream
 git pull upstream master
 
 to copy the custom .dlls to the linux system and build the meterpreter in metasploit-framework we need to run `buildAndCopyMeterpreter.sh`
+
+## Server send response
+
+/home/timo/Tools/bachelor/metasploit-framework/lib/rex/proto/http/server.rb:39
 
 # * Anstatt derzeitiger loesung mit flag die umschaellt wie bei wininet, neue loesung mit url mhttp!!!

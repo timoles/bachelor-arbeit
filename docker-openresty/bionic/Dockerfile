@@ -141,8 +141,8 @@ COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
 COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 
 # Timo
-COPY modifyIncoming.lua /usr/local/openresty/nginx/conf/modifyIncoming.lua
-COPY modifyOutgoing.lua /usr/local/openresty/nginx/conf/modifyOutgoing.lua
+COPY decode.lua /usr/local/openresty/nginx/conf/decode.lua
+COPY encode.lua /usr/local/openresty/nginx/conf/encode.lua
 COPY bodyFilterIncomming.lua /usr/local/openresty/nginx/conf/bodyFilterIncomming.lua
 COPY ee5_base64.lua /usr/local/openresty/nginx/conf/ee5_base64.lua
 CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;"]
