@@ -2,43 +2,43 @@
 
 <!-- MarkdownTOC -->
 
-- Idea
-- Goals
-- Meterpreter
-- Communication
-	- TLVs
-	- Malleable
-- Initial config
-- Malleable transport
-- DLL injection
-- Debugging
-- Building Meterpreter
-- Handling/Implementing LUA scripts in a robust way
-- Meterpreter detection through communication
-- Metasploit-Framework
-- Building payloads with custom files
-- Building handler with custom files
-- Resource Script
-- Implementation of the LUA script setting
-	- Implementing options
-	- Bugfix Bufferoverflow
-	- Changing the datastructure to be able to add a LUA script
-	- Max config size workaround
-- Reverse Proxy
-- Meterpreter and Reverse Proxy
-	- Use cases
-	- Usage
-- NGINX Filter model / directives
-- NGINX Decoding pitfalls
-- NGINX Encoding pitfalls
-- LUA scripting for malleable traffic
-- Basic structure \(required default methods\)
-- Decisions
-- Extension vs Transport
-- Similar products on the market
-- Lookahead
-- Word explanations
-- Heading with anchor
+- [Idea](#idea)
+- [Goals](#goals)
+- [Meterpreter](#meterpreter)
+- [Communication](#communication)
+	- [TLVs](#tlvs)
+	- [Malleable](#malleable)
+- [Initial config](#initial-config)
+- [Malleable transport](#malleable-transport)
+- [DLL injection](#dll-injection)
+- [Debugging](#debugging)
+- [Building Meterpreter](#building-meterpreter)
+- [Handling/Implementing LUA scripts in a robust way](#handlingimplementing-lua-scripts-in-a-robust-way)
+- [Meterpreter detection through communication](#meterpreter-detection-through-communication)
+- [Metasploit-Framework](#metasploit-framework)
+- [Building payloads with custom files](#building-payloads-with-custom-files)
+- [Building handler with custom files](#building-handler-with-custom-files)
+- [Resource Script](#resource-script)
+- [Implementation of the LUA script setting](#implementation-of-the-lua-script-setting)
+	- [Implementing options](#implementing-options)
+	- [Bugfix Bufferoverflow](#bugfix-bufferoverflow)
+	- [Changing the datastructure to be able to add a LUA script](#changing-the-datastructure-to-be-able-to-add-a-lua-script)
+	- [Max config size workaround](#max-config-size-workaround)
+- [Reverse Proxy](#reverse-proxy)
+- [Meterpreter and Reverse Proxy](#meterpreter-and-reverse-proxy)
+	- [Use cases](#use-cases)
+	- [Usage](#usage)
+- [NGINX Filter model / directives](#nginx-filter-model--directives)
+- [NGINX Decoding pitfalls](#nginx-decoding-pitfalls)
+- [NGINX Encoding pitfalls](#nginx-encoding-pitfalls)
+- [LUA scripting for malleable traffic](#lua-scripting-for-malleable-traffic)
+- [Basic structure \(required default methods\)](#basic-structure-required-default-methods)
+- [Decisions](#decisions)
+- [Extension vs Transport](#extension-vs-transport)
+- [Similar products on the market](#similar-products-on-the-market)
+- [Lookahead](#lookahead)
+- [Word explanations](#word-explanations)
+- [Heading with anchor](#heading-with-anchor)
 
 <!-- /MarkdownTOC -->
 
