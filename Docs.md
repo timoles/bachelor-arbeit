@@ -1,5 +1,6 @@
-# Bachelor
+# Bachelor Docs
 
+# TOC
 <!-- MarkdownTOC -->
 
 - [Idea](#idea)
@@ -28,17 +29,19 @@
 - [Meterpreter and Reverse Proxy](#meterpreter-and-reverse-proxy)
 	- [Use cases](#use-cases)
 	- [Usage](#usage)
+- [LUA script en-/decoding Traffic](#lua-script-en-decoding-traffic)
 - [NGINX Filter model / directives](#nginx-filter-model--directives)
 - [NGINX Decoding pitfalls](#nginx-decoding-pitfalls)
 - [NGINX Encoding pitfalls](#nginx-encoding-pitfalls)
 - [LUA scripting for malleable traffic](#lua-scripting-for-malleable-traffic)
 - [Basic structure \(required default methods\)](#basic-structure-required-default-methods)
+	- [Example Meterpreter `encode` function which returns the input buffer unchanged](#example-meterpreter-encode-function-which-returns-the-input-buffer-unchanged)
+	- [Example Meterpreter `decode` function which returns the input buffer unchanged](#example-meterpreter-decode-function-which-returns-the-input-buffer-unchanged)
 - [Decisions](#decisions)
 - [Extension vs Transport](#extension-vs-transport)
 - [Similar products on the market](#similar-products-on-the-market)
 - [Lookahead](#lookahead)
 - [Word explanations](#word-explanations)
-- [Heading with anchor](#heading-with-anchor)
 
 <!-- /MarkdownTOC -->
 
@@ -155,6 +158,10 @@ The during the compilation created `.dll` files need to be placed within the sou
 
 [Meterpreter reverse proxies](https://ionize.com.au/reverse-https-meterpreter-and-empire-behind-nginx/)
 
+## LUA script en-/decoding Traffic
+
+Script requirements for encoding and decoding traffic can be found [here](#LUA-scripting-for-malleable-traffic)
+
 ## NGINX Filter model / directives
 
 [Openresty nginx directive diagram](https://github.com/openresty/lua-nginx-module#directives)
@@ -173,9 +180,29 @@ The during the compilation created `.dll` files need to be placed within the sou
 
 ## Basic structure (required default methods)
 
+The LUA script which is used in the Meterpreter is __required__ to implement at least an encode and a decode function. These functions need to at least return a `nil`.
+
+The LUA script submitted to the Meterpreter cannot be longer then 4096 characters long.
+
+### Example Meterpreter `encode` function which returns the input buffer unchanged
+
+```lua
+function encode(s)
+	return s
+end
 ```
-test
+
+### Example Meterpreter `decode` function which returns the input buffer unchanged
+
+```lua
+function decode(s)
+	return s
+end
 ```
+
+-----
+
+The 
 
 # Decisions
 
@@ -207,5 +234,3 @@ test
 
 Server -> Meterpreter
 Client -> Metasploit-Framework
-
-# Heading with anchor
