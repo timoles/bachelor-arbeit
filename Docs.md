@@ -38,7 +38,7 @@
 - Similar products on the market
 - Lookahead
 - Word explanations
-- [Heading with anchor](#heading-with-anchor)
+- Heading with anchor
 
 <!-- /MarkdownTOC -->
 
@@ -208,4 +208,4 @@ test
 Server -> Meterpreter
 Client -> Metasploit-Framework
 
-# Heading with anchor [heading-with-anchor]
+# Heading with anchor
