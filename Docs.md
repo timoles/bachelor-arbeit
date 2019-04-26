@@ -1,8 +1,73 @@
+# Bachelor
+
+<!-- MarkdownTOC -->
+
+- Idea
+- Goals
+- Meterpreter
+- Communication
+	- TLVs
+	- Malleable
+- Initial config
+- Malleable transport
+- DLL injection
+- Debugging
+- Building Meterpreter
+- Handling/Implementing LUA scripts in a robust way
+- Meterpreter detection through communication
+- Metasploit-Framework
+- Building payloads with custom files
+- Building handler with custom files
+- Resource Script
+- Implementation of the LUA script setting
+	- Implementing options
+	- Bugfix Bufferoverflow
+	- Changing the datastructure to be able to add a LUA script
+	- Max config size workaround
+- Reverse Proxy
+- Meterpreter and Reverse Proxy
+	- Use cases
+	- Usage
+- NGINX Filter model / directives
+- NGINX Decoding pitfalls
+- NGINX Encoding pitfalls
+- LUA scripting for malleable traffic
+- Basic structure \(required default methods\)
+- Decisions
+- Extension vs Transport
+- Similar products on the market
+- Lookahead
+- Word explanations
+- [Heading with anchor](#heading-with-anchor)
+
+<!-- /MarkdownTOC -->
+
+
+## Idea
+
+[Meterpreter wishlist](https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Wishlist#communications-evasion)
+
+## Goals
+
+1. Make extension which gives back what it gets in methods
+
+1. Make extension load before initial connection 
+
+2. Compile and test LUA outside of meterpreter
+
 # Meterpreter
 
 In order to include the malleable communication modifications on the Meterpreter where necessary. There are two major changes to the default Meterpreter, the initial config and a new transport.
 
-## Malleable communication
+## Communication
+
+`TODO`
+
+### TLVs
+
+[Explanation what are TLVs](https://buffered.io/posts/tlv-traffic-obfuscation/)
+
+### Malleable
 
 `TODO`
 
@@ -24,6 +89,7 @@ These malleable functions are called just before the WinAPI call to send out the
 
 ## Debugging
 
+
 `TODO` 
 
 ## Building Meterpreter
@@ -34,6 +100,10 @@ The during the compilation created `.dll` files need to be placed within the sou
 ## Handling/Implementing LUA scripts in a robust way
 
 `TODO` 
+
+## Meterpreter detection through communication
+ 
+`TODO`
 
 # Metasploit-Framework
 
@@ -75,9 +145,19 @@ The during the compilation created `.dll` files need to be placed within the sou
 
 `TODO` 
 
-## NGINX Filter model
+## Meterpreter and Reverse Proxy
 
-`TODO` 
+### Use cases
+
+`TODO`
+
+### Usage
+
+[Meterpreter reverse proxies](https://ionize.com.au/reverse-https-meterpreter-and-empire-behind-nginx/)
+
+## NGINX Filter model / directives
+
+[Openresty nginx directive diagram](https://github.com/openresty/lua-nginx-module#directives)
 
 ## NGINX Decoding pitfalls
 
@@ -93,15 +173,31 @@ The during the compilation created `.dll` files need to be placed within the sou
 
 ## Basic structure (required default methods)
 
+```
+test
+```
+
 # Decisions
 
 ## Extension vs Transport
 
 `TODO` 
 
+# Similar products on the market
+
+* [Cobaltstrike mallable](https://www.cobaltstrike.com/help-malleable-c2)
+
+* [Maligno tool](https://www.encripto.no/en/downloads-2/tools/)
+
+* [Rapid7 mettle](https://github.com/rapid7/mettle)
+
 # Lookahead
 
-* Make it look like legitimate website
+* Integrate event handling system in meterpreter where  we can hook specific functions (like in apache2). (e.g function systemcall or function sendOutgoingpackage) Queues with event priorities and so on
+
+* What happens if extension is unloaded in the middle of beeing used, normaly then meterpreter connection would cut out. Would need backup transport for that
+
+* "Real" usable web application with reverse proxy for extra stealth
 
 * Scripting engine/language
 
@@ -111,3 +207,5 @@ The during the compilation created `.dll` files need to be placed within the sou
 
 Server -> Meterpreter
 Client -> Metasploit-Framework
+
+# Heading with anchor [heading-with-anchor]

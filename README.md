@@ -21,13 +21,13 @@ When creating payload it uses the ones in this directory first
 
 # Links
 
-[Maligno tool](https://www.encripto.no/en/downloads-2/tools/)
 
-[Meterpreter wishlist](https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Wishlist#communications-evasion)
 
-[Cobaltstrike mallable](https://www.cobaltstrike.com/help-malleable-c2)
 
-https://github.com/rapid7/mettle
+
+
+
+
 
 [Build tutorial](https://www.youtube.com/watch?v=de-UYWnafow)
 
@@ -35,7 +35,7 @@ https://github.com/rapid7/mettle
 
 [Create extensions](https://github.com/rapid7/metasploit-payloads/tree/master/c/meterpreter#creating-extensions)
 
-[Explanation what are TLVs](https://buffered.io/posts/tlv-traffic-obfuscation/)
+
 
 [LUA performance tipps](https://www.lua.org/gems/sample.pdf)
 [LUA Base64](http://lua-users.org/wiki/BaseSixtyFour)
@@ -43,19 +43,15 @@ https://github.com/rapid7/mettle
 [winhttp1](https://docs.microsoft.com/de-de/windows/desktop/WinHttp/winhttp-sessions-overview#Posting_data_to_the_)
 [winhttp2](https://docs.microsoft.com/de-de/windows/desktop/WinHttp/winhttp-sessions-overview#Downloading_resource)
 
-[Meterpreter reverse proxies](https://ionize.com.au/reverse-https-meterpreter-and-empire-behind-nginx/)
 
-[Openresty nginx directive diagram](https://github.com/openresty/lua-nginx-module#directives)
+
+
 
 [LUA Base64 encoder/decoder](https://github.com/ErnieE5/ee5_base64)
 
 # Goals
 
-1. Make extension which gives back what it gets in methods
 
-1. Make extension load before initial connection 
-
-2. Compile and test LUA outside of meterpreter
 
 # Compile extension
 
@@ -84,13 +80,6 @@ rm /home/timo/Tools/bachelor/metasploit-framework/data/meterpreter/*.dll; cp /mn
 
 5. Check if loading function works in meterpreter
 
-# Ausblick
-
-* Integrate event handling system in meterpreter where  we can hook specific functions (like in apache2). (e.g function systemcall or function sendOutgoingpackage) Queues with event priorities and so on
-
-* What happens if extension is unloaded in the middle of beeing used, normaly then meterpreter connection would cut out. Would need backup transport for that
-
-* "Real" usable web application with reverse proxy for extra stealth
 
 
 # Notes
@@ -264,6 +253,14 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 * mby two new lines at end of base64 encoded stuff?
 
 * Change User Agent to something else
+
+* Use winapi within lua to do things like base64 encoding
+
+* check android payload???
+
+* msfvenom payload generation!!
+
+* Fallback if malleableTransport fails
 
 # Bisherige Schritte
 

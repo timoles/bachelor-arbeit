@@ -5,6 +5,7 @@
 | LUA Library is external dependency | Need to rewrite/change existing HTTP transport |
 | Easy LUA script setting (directly build for it)  | Harded to do for initial transport (what is loaded first)  |
 | Extended functionality easily implementable  |  |
+| more logical from developer (system architecture) and user view || 
 
 # Pure transport
 
