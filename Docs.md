@@ -208,6 +208,20 @@ An additional LUA script is needed for the OpenResty reverse Proxy. The `decode.
 
 [LUA test suite docs](http://www.lua.org/tests/)
 
+[LUA testing framework which I use](https://github.com/bluebird75/luaunit)
+
+The Meterpreter LUA script needs to implement a Encode and a Decode function. The OpenResty Decode function needs to be able to decode the output of the Meterpreter Encode Method. The OpenResty Encode function needs to return a value which the Meterpreter LUA script can decode.
+
+### Directory Structure
+
+/home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/malleable_testing.lua
+/home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/openresty_malleable.lua
+
+/home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scripts/ee5_base64.lua
+/home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scripts/meterpreter_malleable.lua
+/home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scripts/openresty_decode.lua
+/home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scripts/openresty_encode.lua
+
 # Decisions
 
 ## Extension vs Transport

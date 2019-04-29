@@ -140,11 +140,13 @@ ENV LUA_CPATH="/usr/local/openresty/site/lualib/?.so;/usr/local/openresty/lualib
 COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
 COPY nginx.vh.default.conf /etc/nginx/conf.d/default.conf
 
-# Timo
-COPY decode.lua /usr/local/openresty/nginx/conf/decode.lua
-COPY encode.lua /usr/local/openresty/nginx/conf/encode.lua
-COPY bodyFilterIncomming.lua /usr/local/openresty/nginx/conf/bodyFilterIncomming.lua
-COPY ee5_base64.lua /usr/local/openresty/nginx/conf/ee5_base64.lua
+# BEGIN Timo
+COPY /home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scriptsmalleable_scripts/openresty_decode.lua /usr/local/openresty/nginx/conf/openresty_decode.lua
+COPY /home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scripts/openresty_encode.lua /usr/local/openresty/nginx/conf/openresty_encode.lua
+COPY /home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/openresty_malleable.lua /usr/local/openresty/nginx/conf/openresty_malleable.lua
+COPY /home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scripts/ee5_base64.lua /usr/local/openresty/nginx/conf/ee5_base64.lua
+# END Timo
+
 CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;"]
 
 # Use SIGQUIT instead of default SIGTERM to cleanly drain requests

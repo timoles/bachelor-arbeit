@@ -11,7 +11,7 @@
  setg luri mysuperduperpath
  setg httpuseragent aaa
 
- setg malleablescriptpath /home/timo/Projects/bachelor/lua-testing/LUA_testing/LUA_testing/testFunction.lua
+ setg malleablescriptpath /home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scripts/meterpreter_malleable.lua
  
  set LPORT 80
  

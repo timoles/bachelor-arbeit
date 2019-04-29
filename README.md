@@ -266,6 +266,18 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * config size problem
 
+* remove prints from lua scripts
+
+* Test the unit tests
+
+* Handle GET requests in openresty decode (at the moment we can't change uris, only body content)
+
+* Virustotal anschauen
+
+* The LUA unit testing is kinda funky with the base64 decode library. The `require` base path is set, as it would be used within the docker container. While this file doesn't exist on the unit test system it still works as long as it's in the same directory as the tested scripts.
+
+* change transport implementation
+
 # Bisherige Schritte
 
 1. Basic functionality Extension zum laufen gebracht
