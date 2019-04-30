@@ -298,6 +298,10 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * Lua in metasploit framework is not that great due to dependencies on windows (over all)
 
+* don't completely terminate ssl, establish ssl connection to metasploit-framework
+
+* If meterpreter should quit when malleable communication is not working this needs to be implemented in LUA, also need to provide return value which ends the meterpreter process
+
 # Bisherige Schritte
 
 1. Basic functionality Extension zum laufen gebracht

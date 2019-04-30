@@ -49,6 +49,9 @@
 ## Idea
 
 [Meterpreter wishlist](https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Wishlist#communications-evasion)
+[LUA vs Ruby](http://lua-users.org/wiki/LuaComparison)
+[Other tools for example Cobaltstrike](https://www.cobaltstrike.com/help-malleable-c2)
+[Other tools for example Encripto](https://www.encripto.no/en/downloads-2/tools/)
 
 ## Goals
 
@@ -62,13 +65,23 @@
 
 In order to include the malleable communication modifications on the Meterpreter where necessary. There are two major changes to the default Meterpreter, the initial config and a new transport.
 
+[Meterpreter HTTPS Communication](https://blog.rapid7.com/2011/06/29/meterpreter-httphttps-communication/)
+[Meterpreter detection by IPS](https://security.stackexchange.com/questions/147737/meterpreter-https-detected-by-ips)
+[Domain Fronting with Meterpreter](https://beyondbinary.io/articles/domain-fronting-with-metasploit-and-meterpreter/)
+[OJ Reeves Meterpreter Twitch tutorial](https://www.twitch.tv/ojreeves/videos)
+[Staged vs stageless handlers](https://buffered.io/posts/staged-vs-stageless-handlers/)
+
 ## Communication
 
-`TODO`
+### Wireshark decrypting
+
+[Display filters](https://wiki.wireshark.org/DisplayFilters)
+[Wireshark SSL decrypting](https://wiki.wireshark.org/SSL)
 
 ### TLVs
 
 [Explanation what are TLVs](https://buffered.io/posts/tlv-traffic-obfuscation/)
+[Traffic obfuscation with TLVs](https://buffered.io/posts/tlv-traffic-obfuscation/)
 
 ### Malleable
 
@@ -82,6 +95,8 @@ These commands have the effect, that `TODO`. (Byte alignment on stack, also Char
 While the structure of the data is defined within Meterpreter itself, the config data is defined during the generation of the Meterpreter in the client.
 
 ## Malleable transport
+
+[Multiple transports in meterpreter](https://ionize.com.au/multiple-transports-in-a-meterpreter-payload/)
 
 An additional transport which implements the logic for malleable transport was created. This newly implemented transport is used as soon as the server recieves a malleable URL. A malleable URL is identified by the URLs scheme http(s)m (e.g. httpm://mogwailabs.de, httpsm://mogwailabs.de). During the transport creation the URL is normalized to a typical http protocol, as defined in ISO `TODO`, scheme  Generally speaking the malleable transport has a lot of similarities to the already implemented and established `server_transport_winhttp.h`. It's main differences are the implementation of a LUA library and an encode/decode function for communication packages. The encode/decode functions implement a transport package transformation via a LUA script. 
 These malleable functions are called just before the WinAPI call to send out the package.
@@ -110,7 +125,19 @@ The during the compilation created `.dll` files need to be placed within the sou
 
 # Metasploit-Framework
 
-`TODO`
+[Metasploit Framework Dev environment](https://github.com/rapid7/metasploit-framework/wiki/Setting-Up-a-Metasploit-Development-Environment)
+[Logging in Metasploit](https://github.com/rapid7/metasploit-framework/wiki/How-to-log-in-Metasploit)
+
+## Debugging
+
+[Debugging Metasploit-Framework with ruby-debug-ide (source)](https://rubygems.org/gems/ruby-debug-ide/versions/0.6.0)
+[How to debug Metasploit](http://www.andrej-mohar.com/debugging-metasploit-with-visual-studio-code-on-linux)
+
+## LUA in Metasploit
+
+[Rufus github](https://github.com/jmettraux/rufus-lua)
+[Rufus-Win Github](https://github.com/ukoloff/rufus-lua-win)
+[Ruby-Lua github](https://github.com/glejeune/ruby-lua)
 
 ## Building payloads with custom files
 
@@ -122,7 +149,7 @@ The during the compilation created `.dll` files need to be placed within the sou
 
 ## Resource Script
 
-`TODO`
+[Rapid7 Blog about resource scripts](https://metasploit.help.rapid7.com/docs/resource-scripts)
 
 ## Implementation of the LUA script setting
 
@@ -146,9 +173,15 @@ The during the compilation created `.dll` files need to be placed within the sou
 
 # Reverse Proxy
 
-`TODO` 
 
 ## Meterpreter and Reverse Proxy
+
+[How to reverse proxy and meterpreter](https://medium.com/@truekonrads/reverse-https-meterpreter-behind-apache-or-any-other-reverse-ssl-proxy-e898f9dfff54)
+[Configuring Meterpreter with a https reverse proxy](https://ionize.com.au/reverse-https-meterpreter-and-empire-behind-nginx/)
+
+### Encryption
+
+[How to create encryption key](https://stackoverflow.com/questions/10175812/how-to-create-a-self-signed-certificate-with-openssl)
 
 ### Use cases
 
@@ -162,21 +195,41 @@ The during the compilation created `.dll` files need to be placed within the sou
 
 Script requirements for encoding and decoding traffic can be found [here](#LUA-scripting-for-malleable-traffic)
 
-## NGINX Filter model / directives
+[Issue and example for NGINX buffers](https://github.com/openresty/lua-nginx-module/issues/1092#issuecomment-309081761)
+[Header filter example NGINX](https://gist.github.com/ejlp12/b3949bb40e748ae8367e17c193fa9602)
+[LUA response bodies with great Graphic!!!](https://jkzhao.github.io/2018/05/03/Lua-OpenResty%E4%BF%AE%E6%94%B9response-body/)
+
+
+## NGINX
+
+### Openresty
+
+[Openresty Github](https://github.com/openresty/docker-openresty)
+[LuaJT (used by openresty)](http://luajit.org/luajit.html)
+
+### NGINX settings
+
+[Digital ocean set up encryption on nginx](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04)
+[Cipher list for nginx settings (as seen in digital ocen doc)](https://cipherli.st/)
+[Official NGINX Docs configuring servers](http://nginx.org/en/docs/http/configuring_https_servers.html)
+[NGINX example server](https://www.nginx.com/resources/wiki/start/topics/examples/fullexample2/)
+[Setting up NGINX reverse proxy](https://chase-seibert.github.io/blog/2011/12/21/nginx-ssl-reverse-proxy-tutorial.html#)
+
+### NGINX Filter model / directives
 
 [Openresty nginx directive diagram](https://github.com/openresty/lua-nginx-module#directives)
 
-## NGINX Decoding pitfalls
+### NGINX Decoding pitfalls
 
 `TODO` 
 
-## NGINX Encoding pitfalls
+### NGINX Encoding pitfalls
 
 `TODO` 
 
-# LUA scripting for malleable traffic
+### LUA scripting for malleable traffic
 
-`TODO` 
+[Cammel_case SnakeCase](https://www.reddit.com/r/lua/comments/1shtsg/is_camelcase_or_snake_case_more_common_in_lua/)
 
 ## Basic structure (required default methods)
 
@@ -207,8 +260,8 @@ An additional LUA script is needed for the OpenResty reverse Proxy. The `decode.
 ## Unit Tests
 
 [LUA test suite docs](http://www.lua.org/tests/)
-
-[LUA testing framework which I use](https://github.com/bluebird75/luaunit)
+[LuaUnit - LUA testing framework which I use](https://github.com/bluebird75/luaunit)
+[Property based testing](https://medium.com/criteo-labs/introduction-to-property-based-testing-f5236229d237)
 
 The Meterpreter LUA script needs to implement a Encode and a Decode function. The OpenResty Decode function needs to be able to decode the output of the Meterpreter Encode Method. The OpenResty Encode function needs to return a value which the Meterpreter LUA script can decode.
 
@@ -260,6 +313,13 @@ The Meterpreter LUA script needs to implement a Encode and a Decode function. Th
 * "Real" usable web application with reverse proxy for extra stealth
 
 * Scripting engine/language
+
+### Misc sources
+
+[C wcsdup](https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/strdup-wcsdup-mbsdup?view=vs-2019)
+[Rapid7 developer diaries](https://www.rapid7.com/research/report/metasploit-development-diaries-q1-2019/)
+[Python extension](https://github.com/rapid7/metasploit-framework/wiki/Python-Extension)
+[Write a metasploit post module](https://github.com/rapid7/metasploit-framework/wiki/How-to-get-started-with-writing-a-post-module)
 
 -----
 
