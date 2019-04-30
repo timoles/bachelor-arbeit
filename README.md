@@ -278,6 +278,26 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * change transport implementation
 
+* When starting with normal transport  and then add transport, test that
+
+* Proxy just passthru if no viewstates are detected?
+
+* implement transport change reverse_mhttps
+
+* Domain fronting
+
+* What does chached size do????
+
+* on passive request error message
+
+* Vor-/Nachteile mit Proxy oder in metasploit framework selbst
+
+*  `RuntimeError Didn't find the Lua dynamic library (liblua5.1.*)` Dependencies!! new gemfile and `timo@timo ~/T/b/metasploit-framework> sudo apt-get install liblua5.1-0` 
+
+* Test everything on windows meterpreter
+
+* Lua in metasploit framework is not that great due to dependencies on windows (over all)
+
 # Bisherige Schritte
 
 1. Basic functionality Extension zum laufen gebracht
@@ -292,6 +312,8 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * `transport add -t reverse_mhttp -l 192.168.42.131 -p 5555 -T 50000 -W 2500 -C 100000 -A "Totes-Legit Browser/1.1"`
 
+Generate pem `openssl req -x509 -newkey rsa:4096 -keyout malleable_key.pem -out malleable_cert.pem -days 7300 -nodes -subj '/CN=localhost'`
+
  Payload generation failed: comparison of Integer with nil failed
 
  git remote add upstream git://github.com/rapid7/metasploit-framework.git
@@ -299,6 +321,8 @@ git fetch upstream
 git pull upstream master
 
 to copy the custom .dlls to the linux system and build the meterpreter in metasploit-framework we need to run `buildAndCopyMeterpreter.sh`
+
+`/home/timo/.gem/ruby/2.6.0/gems/ruby-debug-ide-0.7.0.beta7/bin/rdebug-ide --host 127.0.0.1 --port 1234 -- ~/Tools/bachelor/metasploit-framework/msfconsole`
 
 ## Server send response
 
