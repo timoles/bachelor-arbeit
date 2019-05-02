@@ -1,5 +1,15 @@
 # BA Timo
 
+[Check out the Docs for more information!](Docs.md)
+
+---
+---
+---
+---
+---
+---
+---
+
 # Goals
 
 Meterpreter output in base64 encoded encrypted "viewstate"
@@ -13,45 +23,13 @@ rm ~/Tools/bachelor_metasploit/metasploit-framework/data/meterpreter/*.dll; cp /
 
 Run metasploit auto create payload and start handlers
 ```bash
- ./msfconsole -r ~/Projects/bachelor/msf.rc 
+./msfconsole -r ~/Projects/bachelor/msf.rc 
+~/Projects/bachelor/buildAndCopyMeterpreter.sh
+~/Projects/bachelor/buildAndCopyMeterpreter_remote_debugging.sh
 ```
 
 Write .dll(s) into `/home/timo/Tools/bachelor_metasploit/metasploit-framework/data/meterpreter`
-When creating payload it uses the ones in this directory first
-
-# Links
-
-
-
-
-
-
-
-
-
-[Build tutorial](https://www.youtube.com/watch?v=de-UYWnafow)
-
-[Run extension before connection is established](https://github.com/rapid7/metasploit-framework/wiki/Python-Extension#stageless-initialisation)
-
-[Create extensions](https://github.com/rapid7/metasploit-payloads/tree/master/c/meterpreter#creating-extensions)
-
-
-
-[LUA performance tipps](https://www.lua.org/gems/sample.pdf)
-[LUA Base64](http://lua-users.org/wiki/BaseSixtyFour)
-[LUA Binary](https://sourceforge.net/projects/luabinaries/files/5.3.4/Windows%20Libraries/Dynamic/)
-[winhttp1](https://docs.microsoft.com/de-de/windows/desktop/WinHttp/winhttp-sessions-overview#Posting_data_to_the_)
-[winhttp2](https://docs.microsoft.com/de-de/windows/desktop/WinHttp/winhttp-sessions-overview#Downloading_resource)
-
-
-
-
-
-[LUA Base64 encoder/decoder](https://github.com/ErnieE5/ee5_base64)
-
-# Goals
-
-
+When creating payload it searches for dlls to use in this directory first
 
 # Compile extension
 
@@ -79,8 +57,6 @@ rm /home/timo/Tools/bachelor/metasploit-framework/data/meterpreter/*.dll; cp /mn
 4. Check if loading function in metasploit works
 
 5. Check if loading function works in meterpreter
-
-
 
 # Notes
 
