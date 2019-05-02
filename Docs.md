@@ -45,7 +45,6 @@
 
 <!-- /MarkdownTOC -->
 
-
 ## Idea
 
 [Meterpreter wishlist](https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Wishlist#communications-evasion)
@@ -97,6 +96,7 @@ While the structure of the data is defined within Meterpreter itself, the config
 ## Malleable transport
 
 [Multiple transports in meterpreter](https://ionize.com.au/multiple-transports-in-a-meterpreter-payload/)
+[The in and outs of Meterpreter Transport](https://github.com/rapid7/metasploit-framework/wiki/The-ins-and-outs-of-HTTP-and-HTTPS-communications-in-Meterpreter-and-Metasploit-Stagers)
 
 An additional transport which implements the logic for malleable transport was created. This newly implemented transport is used as soon as the server recieves a malleable URL. A malleable URL is identified by the URLs scheme http(s)m (e.g. httpm://mogwailabs.de, httpsm://mogwailabs.de). During the transport creation the URL is normalized to a typical http protocol, as defined in ISO `TODO`, scheme  Generally speaking the malleable transport has a lot of similarities to the already implemented and established `server_transport_winhttp.h`. It's main differences are the implementation of a LUA library and an encode/decode function for communication packages. The encode/decode functions implement a transport package transformation via a LUA script. 
 These malleable functions are called just before the WinAPI call to send out the package.
@@ -196,6 +196,7 @@ The during the compilation created `.dll` files need to be placed within the sou
 Script requirements for encoding and decoding traffic can be found [here](#LUA-scripting-for-malleable-traffic)
 
 [Issue and example for NGINX buffers](https://github.com/openresty/lua-nginx-module/issues/1092#issuecomment-309081761)
+[Openresty code examples](https://dchua.com/2017/01/01/supercharge-your-nginx-with-openresty-and-lua/)
 [Header filter example NGINX](https://gist.github.com/ejlp12/b3949bb40e748ae8367e17c193fa9602)
 [LUA response bodies with great Graphic!!!](https://jkzhao.github.io/2018/05/03/Lua-OpenResty%E4%BF%AE%E6%94%B9response-body/)
 
@@ -316,10 +317,22 @@ The Meterpreter LUA script needs to implement a Encode and a Decode function. Th
 
 ### Misc sources
 
-[C wcsdup](https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/strdup-wcsdup-mbsdup?view=vs-2019)
+[C wcsdup (wide char string duplication)](https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/strdup-wcsdup-mbsdup?view=vs-2019)
 [Rapid7 developer diaries](https://www.rapid7.com/research/report/metasploit-development-diaries-q1-2019/)
 [Python extension](https://github.com/rapid7/metasploit-framework/wiki/Python-Extension)
 [Write a metasploit post module](https://github.com/rapid7/metasploit-framework/wiki/How-to-get-started-with-writing-a-post-module)
+[Writing meterpreter extensions](https://www.scriptjunkie.us/2011/08/writing-meterpreter-extensions/)
+[Evil NGINX alternative to openresty NGINX](https://github.com/kgretzky/evilginx2)
+[TLV Traffic obfuscation](https://buffered.io/posts/tlv-traffic-obfuscation/)
+[LUA docs (overview of functions)](http://pgl.yoyo.org/luai/i/luaL_loadstring)
+[WINHTTP API Docs](https://docs.microsoft.com/en-us/windows/desktop/api/winhttp/nf-winhttp-winhttpsendrequest)
+[Domain fronting with Meterpreter](https://beyondbinary.io/articles/domain-fronting-with-metasploit-and-meterpreter/)
+[LUA string library examples](http://lua-users.org/wiki/StringLibraryTutorial)
+[Meterpreter transport controll (Everything about transports)](https://github.com/rapid7/metasploit-framework/wiki/Meterpreter-Transport-Control)
+[LUA Base64 decode example code](https://stackoverflow.com/questions/34618946/lua-base64-encode)
+[LUA Base64 library I use](https://github.com/ErnieE5/ee5_base64)
+[Nmap Base64 LUA implementation](https://github.com/nmap/nmap/blob/master/nselib/base64.lua)
+[Microsoft Docs](https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/strinc-wcsinc-mbsinc-mbsinc-l?view=vs-2019)
 
 -----
 

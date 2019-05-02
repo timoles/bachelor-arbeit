@@ -302,6 +302,10 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * If meterpreter should quit when malleable communication is not working this needs to be implemented in LUA, also need to provide return value which ends the meterpreter process
 
+* Test Paranoid mode
+
+* Implement WinInet fallback
+
 # Bisherige Schritte
 
 1. Basic functionality Extension zum laufen gebracht
