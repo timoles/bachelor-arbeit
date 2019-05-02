@@ -333,6 +333,15 @@ The Meterpreter LUA script needs to implement a Encode and a Decode function. Th
 [LUA Base64 library I use](https://github.com/ErnieE5/ee5_base64)
 [Nmap Base64 LUA implementation](https://github.com/nmap/nmap/blob/master/nselib/base64.lua)
 [Microsoft Docs](https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/strinc-wcsinc-mbsinc-mbsinc-l?view=vs-2019)
+[LUA performance tipps](https://www.lua.org/gems/sample.pdf)
+[LUA Base64](http://lua-users.org/wiki/BaseSixtyFour)
+[LUA Binary](https://sourceforge.net/projects/luabinaries/files/5.3.4/Windows%20Libraries/Dynamic/)
+[winhttp1](https://docs.microsoft.com/de-de/windows/desktop/WinHttp/winhttp-sessions-overview#Posting_data_to_the_)
+[winhttp2](https://docs.microsoft.com/de-de/windows/desktop/WinHttp/winhttp-sessions-overview#Downloading_resource)
+[Build tutorial](https://www.youtube.com/watch?v=de-UYWnafow)
+[Run extension before connection is established](https://github.com/rapid7/metasploit-framework/wiki/Python-Extension#stageless-initialisation)
+[Create extensions](https://github.com/rapid7/metasploit-payloads/tree/master/c/meterpreter#creating-extensions)
+[LUA Base64 encoder/decoder](https://github.com/ErnieE5/ee5_base64)
 
 -----
 
