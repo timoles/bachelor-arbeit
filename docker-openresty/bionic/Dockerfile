@@ -145,6 +145,12 @@ COPY openresty_decode.lua /usr/local/openresty/nginx/conf/openresty_decode.lua
 COPY openresty_encode.lua /usr/local/openresty/nginx/conf/openresty_encode.lua
 COPY openresty_malleable.lua /usr/local/openresty/nginx/conf/openresty_malleable.lua
 COPY ee5_base64.lua /usr/local/openresty/nginx/conf/ee5_base64.lua
+
+COPY nginx-selfsigned.key /etc/ssl/private/nginx-selfsigned.key
+COPY nginx-selfsigned.crt /etc/ssl/certs/nginx-selfsigned.crt
+COPY self-signed.conf /etc/nginx/snippets/self-signed.conf
+COPY ssl-params.conf /etc/nginx/snippets/ssl-params.conf
+
 # END Timo
 
 CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;"]

