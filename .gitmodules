@@ -1,0 +1,9 @@
+[submodule "meterpreter_payloads_debuggable"]
+	path = meterpreter_payloads_debuggable
+	url = git@github.com:timoles/bachelor-meterpreter_payloads_debuggable.git
+[submodule "metasploit_payloads"]
+	path = metasploit_payloads
+	url = git@github.com:timoles/bachelor-metasploit_payloads.git
+[submodule "metasploit_framework"]
+	path = metasploit_framework
+	url = git@github.com:timoles/bachelor-metasploit_framework.git
