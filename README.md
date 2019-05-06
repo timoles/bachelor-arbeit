@@ -309,6 +309,10 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * Do I want to support control commands (special malleable encode/decode return strings) ? 
 
+* put malleable stuff into ctx `ctx->malleable_decode(...)`
+
+* return nil in proxy if we get empty string
+
 # Bisherige Schritte
 
 1. Basic functionality Extension zum laufen gebracht

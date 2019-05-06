@@ -122,14 +122,16 @@ function dec (e)
 end
 
 function encode(s)
-    --return s
+    if(#s == 0) then -- we got null buffer
+        return s
+    end
     encoded = enc(s)
     resultString = "test=123&viewstate=\"" .. encoded ..  "\"&test2=456"
 	return(resultString)
 end
 
 function decode(s)
-    if s == nil then
+    if(#s == 0) then -- we got null buffer
         return s
     end
 

