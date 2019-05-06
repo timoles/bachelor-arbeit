@@ -60,6 +60,14 @@
 
 2. Compile and test LUA outside of meterpreter
 
+## Componentes
+
+* Meterpreter Transport
+* Meterpreter Extension
+* Modified Framework for Extension/Transport
+* Unit tests for Malleable LUA scripts
+* Reverse Proxy
+
 # Meterpreter
 
 In order to include the malleable communication modifications on the Meterpreter where necessary. There are two major changes to the default Meterpreter, the initial config and a new transport.

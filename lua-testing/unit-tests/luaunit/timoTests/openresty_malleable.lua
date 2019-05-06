@@ -1,5 +1,11 @@
 --encode.lua
-local base64=require('/usr/local/openresty/nginx/conf/ee5_base64')
+local status, base64 = pcall(require, "/usr/local/openresty/nginx/conf/ee5_base64")
+if(status) then
+    
+else
+	base64 = require('scripts.ee5_base64')
+end
+
 
 local M = {}
 

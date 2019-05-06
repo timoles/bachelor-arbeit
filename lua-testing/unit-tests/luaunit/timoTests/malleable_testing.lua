@@ -3,7 +3,8 @@
 local lu = require('luaunit')
 
 local proxy = require('openresty_malleable')
-local meterpreter = require('scripts.meterpreter_malleable')
+--local meterpreter = require('scripts.meterpreter_malleable')
+local meterpreter = require('scripts.malleableScript_characterlimit')
 
 -- class TestTiti
 
