@@ -313,6 +313,8 @@ sudo docker build -t myopenresty -f bionic/Dockerfile .;sudo docker run -p80:80 
 
 * return nil in proxy if we get empty string
 
+* Try to initiate transport change when malleable encoding or decoding fails. If transport change is not possible, exit Meterpreter.
+
 # Bisherige Schritte
 
 1. Basic functionality Extension zum laufen gebracht
